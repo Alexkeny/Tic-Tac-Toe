@@ -7,10 +7,11 @@ def display_board(board):
     print(board[1]+'|'+board[2]+'|'+board[3])
 
 def player_input():
-
+    """Takes input from user and performs simple checks """
+    
     choose = 0
     while choose != 'X' or choose != 'O':
-        choose = input("Do you want to be X or O?\n")
+        choose = input("Do you want to be X or O?\n").upper()
     
         if choose == 'X':
             #print("Player 1 will go first.")
@@ -42,10 +43,8 @@ def choose_first():
     return random.randint(1, 2)
 
 def space_check(board, position):
-    
-    if board[position] == 'O' or board[position] == 'X':
-        return False # space not available
-    return True # space available
+    """Check if position is available or not"""
+    return board[position] == ' '
 
 def full_board_check(board):
     if board.count("O") == 5 or board.count("X") == 5:

@@ -52,24 +52,28 @@ def full_board_check(board):
     return False
 
 def player_choice(board):
+    """This function checks user input and provide a number from 1 to 9.
+    Also, it will check does position is occupied or not."""
     
-    choose = 0
+    choose = "WRONG"
     
-    while True:
+    while choose.isdigit() == False:
         choose = input("Please enter next postion from 1 to 9.\n")
-        
-        if choose.isdigit():
+    
+        if choose.isdigit() == True:
             choose = int(choose)
             if choose > 0 and choose < 10:
                 if space_check(board, choose):
                     return choose
                 else:
                     print("Position is occupied. Please choose available position.")
-                    choose = 0
+                    choose = "WRONG"
             else:
                 print("Incorrect input. Number should be from 1 to 9.")
+                choose = "WRONG"
         else:
             print("Incorrect input. It should be a number.")
+            choose = "WRONG"
 
 def replay():
     

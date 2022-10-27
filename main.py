@@ -35,6 +35,7 @@ def win_check(board, mark):
     (board[2] == board [5] == board [8] == mark) or
     (board[3] == board [6] == board [9] == mark))
 
+from curses.ascii import isdigit
 import random
 
 def choose_first():
@@ -56,24 +57,24 @@ def player_choice(board):
     Also, it will check does position is occupied or not."""
     
     choose = "WRONG"
+    acceptable_range = range(0,10)
+    within_range = False
     
-    while choose.isdigit() == False:
+    while choose.isdigit() == False or within_range == False:
         choose = input("Please enter next postion from 1 to 9.\n")
-    
-        if choose.isdigit() == True:
-            choose = int(choose)
-            if choose > 0 and choose < 10:
-                if space_check(board, choose):
-                    return choose
+
+        if choose.isdigit() == False:
+            print("This is not a digit. Please enter value from 1 to 9.")
+
+        if choose.isdigit():
+            if int(choose) in acceptable_range:
+                if space_check(board, int(choose)):
+                    return int(choose)
                 else:
                     print("Position is occupied. Please choose available position.")
-                    choose = "WRONG"
             else:
                 print("Incorrect input. Number should be from 1 to 9.")
-                choose = "WRONG"
-        else:
-            print("Incorrect input. It should be a number.")
-            choose = "WRONG"
+                within_range == False
 
 def replay():
     
